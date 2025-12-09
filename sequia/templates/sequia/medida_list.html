@@ -1,0 +1,17 @@
+<h2 class="text-xl font-bold mb-4">Medidas (Soluciones)</h2>
+<p><a class="text-blue-600 underline" href="{% url 'medida_create' %}">Nueva medida</a>
+ | <a class="text-blue-600 underline" href="{% url 'home' %}">Inicio</a></p>
+<ul class="mt-4 space-y-2">
+  {% for m in items %}
+    <li class="border rounded p-3">
+      <strong>{{ m.nombre }}</strong> — {{ m.region }}{% if m.fuente %} ({{ m.fuente }}){% endif %}
+      — Avance: {{ m.avance_pct }}%
+      <span class="float-right">
+        <a class="text-blue-600" href="{% url 'medida_update' m.id %}">Editar</a> |
+        <a class="text-red-600" href="{% url 'medida_delete' m.id %}">Eliminar</a>
+      </span>
+    </li>
+  {% empty %}
+    <li>No hay medidas registradas.</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,6 @@
+<h2 class="text-xl font-bold mb-4">Eliminar medida</h2>
+<p>¿Seguro que deseas eliminar <strong>{{ object.nombre }}</strong>?</p>
+<form method="post">{% csrf_token %}
+  <button class="px-4 py-2 rounded bg-red-600 text-white">Eliminar</button>
+  <a class="ml-3 text-blue-600" href="{% url 'medida_list' %}">Cancelar</a>
+</form>

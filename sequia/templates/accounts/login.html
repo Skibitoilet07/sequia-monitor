@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Iniciar sesión | Sequía Monitor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0a0f1f;
+      --bg-secondary: #0d1424;
+      --fg: #e5eefc;
+      --muted: #a7b6d6;
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --accent: #22c55e;
+      --danger: #ef4444;
+      --card: #0d1628;
+      --stroke: #1d2a48;
+      --sand: #fbbf24;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      color: var(--fg);
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      width: 100%;
+      align-items: center;
+    }
+
+    /* Improved left section with better visual hierarchy */
+    .illustration-section {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.08) 0%,
+        rgba(34, 197, 94, 0.04) 100%
+      );
+      border: 1px solid var(--stroke);
+      padding: 48px 40px;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .illustration-header {
+      margin-bottom: 32px;
+    }
+
+    .illustration-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--fg);
+      letter-spacing: -0.5px;
+    }
+
+    .illustration-header p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+      max-width: 420px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .feature-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(13, 22, 40, 0.6);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(13, 22, 40, 0.9);
+      border-color: var(--primary);
+    }
+
+    .feature-icon {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .feature-icon.primary {
+      background: var(--primary);
+    }
+
+    .feature-icon.accent {
+      background: var(--accent);
+    }
+
+    .feature-text strong {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 2px;
+      color: var(--fg);
+    }
+
+    .feature-text span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .illustration-footer {
+      padding-top: 24px;
+      border-top: 1px solid var(--stroke);
+    }
+
+    .water-visual {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .water-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      opacity: 0.3;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .water-dot:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .water-dot:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Improved form panel with cleaner styling */
+    .form-section {
+      background: linear-gradient(
+        135deg,
+        rgba(13, 22, 40, 0.8) 0%,
+        rgba(10, 15, 31, 0.6) 100%
+      );
+      border: 1px solid var(--stroke);
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-header {
+      margin-bottom: 32px;
+    }
+
+    .form-header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .form-header-top svg {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .form-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--fg);
+      letter-spacing: -0.5px;
+    }
+
+    .form-header p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 8px 0 0 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.9;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--stroke);
+      background: rgba(14, 23, 48, 0.5);
+      color: var(--fg);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    input::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      background: rgba(14, 23, 48, 0.8);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .password-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .password-wrapper label {
+      flex: 1;
+      margin: 14px 0 8px 0;
+    }
+
+    .toggle-btn {
+      background: transparent;
+      color: var(--primary-light);
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      margin-top: 14px;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(96, 165, 250, 0.1);
+      color: var(--primary);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .hint code {
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: var(--primary-light);
+    }
+
+    .form-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    button,
+    a.btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+    }
+
+    button:active,
+    a.btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary-light);
+      border: 1.5px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--danger);
+      color: #fca5a5;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    .footer-text {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--stroke);
+    }
+
+    .footer-text a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-text a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .illustration-section {
+        min-height: 400px;
+      }
+
+      .form-section {
+        padding: 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .container {
+        gap: 16px;
+      }
+
+      .illustration-section {
+        padding: 32px 24px;
+        min-height: 320px;
+      }
+
+      .form-section {
+        padding: 28px 20px;
+      }
+
+      .illustration-header h2,
+      .form-header h1 {
+        font-size: 24px;
+      }
+
+      .form-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Section: Information -->
+    <section class="illustration-section">
+      <div class="illustration-header">
+        <h2>Sequía Monitor</h2>
+        <p>Acceso seguro al panel de control. Monitorea indicadores de sequía, filtra por región y gestiona medidas.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon primary"></div>
+          <div class="feature-text">
+            <strong>API REST Activa</strong>
+            <span>Consultas públicas de lectura con acceso seguro</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon accent"></div>
+          <div class="feature-text">
+            <strong>Sesiones Seguras</strong>
+            <span>Protección CSRF, expiración por inactividad</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon primary"></div>
+          <div class="feature-text">
+            <strong>Datos Encriptados</strong>
+            <span>Contraseñas hasheadas con estándares modernos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="illustration-footer">
+        <p style="font-size: 13px; color: var(--muted); margin: 0; margin-bottom: 12px;">Estado del servicio</p>
+        <div class="water-visual">
+          <div class="water-dot"></div>
+          <div class="water-dot"></div>
+          <div class="water-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Section: Form -->
+    <section class="form-section" role="main" aria-label="Formulario de inicio de sesión">
+      <div class="form-header">
+        <div class="form-header-top">
+          <svg viewBox="0 0 24 24" fill="#60a5fa" aria-hidden="true">
+            <path d="M12 2c3 4 7 8 7 12a7 7 0 1 1-14 0c0-4 4-8 7-12z" />
+          </svg>
+          <h1>Bienvenido</h1>
+        </div>
+        <p>Inicia sesión para acceder al panel</p>
+      </div>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="tu_usuario"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="password-wrapper">
+            <label for="password">Contraseña</label>
+            <button type="button" class="toggle-btn" onclick="togglePassword()">Mostrar</button>
+          </div>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+          <div class="hint">Consejo: usa tu usuario de <code>/admin/</code> o regístrate.</div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+          <a href="{% url 'signup' %}" class="btn btn-secondary">Crear cuenta</a>
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="error-message">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      </form>
+
+      <div class="footer-text">
+        ¿Problemas? Revisa <a href="/api/docs/">/api/docs</a> o contacta a un administrador.
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const btn = document.querySelector('.toggle-btn');
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'Ocultar';
+      } else {
+        input.type = 'password';
+        btn.textContent = 'Mostrar';
+      }
+    }
+  </script>
+</body>
+</html>
