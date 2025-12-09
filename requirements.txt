@@ -14,5 +14,5 @@ gunicorn
 whitenoise
 requests
 python-dotenv
-django-cors-headers==4.4.0
- ed1f24d337f93b33bbe1dae552fd6f202d2054c6
+django-cors-headers==4.3.1
+
