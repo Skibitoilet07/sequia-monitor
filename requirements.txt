@@ -1,0 +1,9 @@
+Django
+djangorestframework
+djangorestframework-simplejwt
+django-filter
+mysqlclient       # o el driver que uses para MariaDB en desarrollo
+gunicorn
+whitenoise
+requests
+python-dotenv
