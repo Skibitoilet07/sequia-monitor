@@ -1,6 +1,18 @@
+HEAD
 asgiref==3.11.0
 dj-database-url==3.0.1
 Django==6.0
 psycopg2-binary==2.9.11
 sqlparse==0.5.4
 tzdata==2025.2
+Django
+djangorestframework
+djangorestframework-simplejwt
+django-filter
+mysqlclient       # o el driver que uses para MariaDB en desarrollo
+gunicorn
+whitenoise
+requests
+python-dotenv
+django-cors-headers==4.4.0
+ ed1f24d337f93b33bbe1dae552fd6f202d2054c6
