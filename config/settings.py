@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-1fxqzdnk=93lc6zbf(&f^3&oe93^do!uow3x1z8zz5f4cz5!#f"
 )
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0", "192.168.56.1"]
+ALLOWED_HOSTS = ['sequia-monitor.onrender.com','localhost','127.0.0.1',]
 
 # -----------------------------------------------------------
 # APLICACIONES INSTALADAS
